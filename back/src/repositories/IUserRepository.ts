@@ -1,3 +1,4 @@
 export interface IUserRepository {
-  getIdByUsername: (data: string) => Promise<string>;
+  getUserIdByUsername: (username: string) => Promise<string | null>;
+  getStatsByUserId: (stats: string) => Promise<string>;
 }
