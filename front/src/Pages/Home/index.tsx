@@ -20,9 +20,7 @@ export default function Home() {
 
 	async function load() {
 		setIsLoading(true);
-		console.log('indo la');
 		const result = await getStatsUser(userName);
-		console.log(result);
 		setUserSelected(result);
 		setIsLoading(false);
 	}
@@ -45,7 +43,7 @@ export default function Home() {
 					onChange={e => setUsername(e.target.value)}
 				/>
 				<Button isLoading={isLoading} disabled={isLoading} type="submit">
-					Buscar
+					Pesquisar
 				</Button>
 			</form>
 			<Tabs infos={userSelected} />
