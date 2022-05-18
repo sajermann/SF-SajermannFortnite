@@ -5,7 +5,7 @@ const myCache = new NodeCache();
 
 export class UserServices implements IUserServices {
   constructor() {}
-  async getStats(username: string) {
+  async getStats(username: string): Promise<object | null>{
     const userRepository = new UserRepository();
     let userId = myCache.get(username) as string | null;
     if (!userId) {

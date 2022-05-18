@@ -10,5 +10,8 @@ routes.get("/getStatsByUsername", async (req, res) => {
   }
   const userServices = new UserServices();
   const result = await userServices.getStats(username as string);
-  return res.status(200).json({ data: result });
+  if(!result){
+    return res.sendStatus(404).send();
+  }
+  return res.status(200).json(result);
 });
