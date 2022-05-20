@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import { List, UserSquare } from 'phosphor-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 type Props = {
 	children: React.ReactNode;
@@ -10,6 +10,16 @@ type Props = {
 
 export default function Drawler({ children, side }: Props) {
 	const [isOpen, setIsOpen] = useState(false);
+	const [configSide, setConfigSide] = useState({ side: '', translate: '' });
+
+	useEffect(() => {
+		if (side === 'left') {
+			setConfigSide({ side: 'left-o', translate: '-translate-x-full' });
+		} else {
+			setConfigSide({ side: 'right-0', translate: 'translate-x-full' });
+		}
+	}, [side]);
+
 	return (
 		<>
 			<button
@@ -31,10 +41,10 @@ export default function Drawler({ children, side }: Props) {
 				}`}
 			>
 				<section
-					className={` w-screen max-w-lg ${side}-0 absolute bg-white h-full shadow-xl delay-400 duration-500 ease-in-out transition-all transform  ${
-						isOpen
-							? ' translate-x-0 '
-							: `${side === 'left' ? '-' : ''}translate-x-full`
+					className={` w-screen max-w-lg ${
+						configSide.side
+					} absolute bg-white h-full shadow-xl delay-400 duration-500 ease-in-out transition-all transform  ${
+						isOpen ? ' translate-x-0 ' : `${configSide.translate}`
 					}`}
 				>
 					<article className="relative w-screen max-w-lg pb-10 flex flex-col space-y-6 overflow-y-scroll h-full">

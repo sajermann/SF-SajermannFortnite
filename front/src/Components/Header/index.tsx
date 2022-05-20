@@ -5,7 +5,7 @@ export default function Header() {
 		<nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800">
 			<div className="container flex flex-wrap justify-between items-center mx-auto">
 				<Drawler side="left">
-					<div>Bruno</div>
+					<div>Aqui vai ficar o Menu</div>
 				</Drawler>
 
 				<a href="/" className="flex items-center">
@@ -19,18 +19,17 @@ export default function Header() {
 					</span>
 				</a>
 				<div className="flex items-center md:order-2">
-					<button
+					{/* <button
 						type="button"
 						className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
 						id="user-menu-button"
 						aria-expanded="false"
 						data-dropdown-toggle="dropdown"
-					>
-						<span className="sr-only">Open user menu</span>
-						<Drawler side="right">
-							<div>Bruno</div>
-						</Drawler>
-					</button>
+					> */}
+					<Drawler side="right">
+						<div>Aqui vai ficar o perfil</div>
+					</Drawler>
+					{/* </button> */}
 					{/* <!-- Dropdown menu --> */}
 					<div
 						className="hidden z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
