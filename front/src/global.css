@@ -4,5 +4,5 @@
 
 
 body{
-	@apply bg-[#09090a] text-zinc-100
+	@apply bg-white  text-zinc-100 dark:bg-[#09090a]
 }

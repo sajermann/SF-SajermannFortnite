@@ -1,10 +1,4 @@
-import {
-	DetailedHTMLProps,
-	FormEvent,
-	FormHTMLAttributes,
-	useEffect,
-	useState,
-} from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import Button from '../../Components/Button';
 import Tabs from '../../Components/Tabs';
 import getStatsUser from '../../Services/Stats';

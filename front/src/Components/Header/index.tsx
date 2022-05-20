@@ -1,7 +1,13 @@
+import Drawler from '../Drawler';
+
 export default function Header() {
 	return (
 		<nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800">
 			<div className="container flex flex-wrap justify-between items-center mx-auto">
+				<Drawler side="left">
+					<div>Bruno</div>
+				</Drawler>
+
 				<a href="/" className="flex items-center">
 					<img
 						src="https://rodasdadiversao.files.wordpress.com/2018/07/fortnite-logo-ps4.png?w=512"
@@ -21,11 +27,9 @@ export default function Header() {
 						data-dropdown-toggle="dropdown"
 					>
 						<span className="sr-only">Open user menu</span>
-						<img
-							className="w-8 h-8 rounded-full"
-							src="https://static.wikia.nocookie.net/fortnite/images/c/c3/Survivalist_Jonesy_Rare.png/revision/latest?cb=20180522004145"
-							alt="User Avatar"
-						/>
+						<Drawler side="right">
+							<div>Bruno</div>
+						</Drawler>
 					</button>
 					{/* <!-- Dropdown menu --> */}
 					<div
