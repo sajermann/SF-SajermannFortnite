@@ -9,13 +9,13 @@ import { TypeOnlyAliasDeclaration } from "typescript";
 
 import Client from "../client";
 
-export interface ExtendInteraction extends CommandInteraction {
+export interface ExtendedInteraction extends CommandInteraction {
   member: GuildMember;
 }
 
 interface RunOptions {
   client: Client;
-  interaction: ExtendInteraction;
+  interaction: ExtendedInteraction;
   args: CommandInteractionOptionResolver;
 }
 
@@ -24,6 +24,6 @@ type Run = (options: RunOptions) => any;
 export type Command = ApplicationCommandData & {
   name: string;
   description: string;
-  test: TypeOnlyAliasDeclaration;
+  testOnly: boolean;
   run: Run;
 } & ChatInputApplicationCommandData;
