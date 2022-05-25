@@ -186,7 +186,7 @@ client.on("messageCreate", async (message) => {
   console.log(retorno.join('\n'))
 
   message.reply({
-    content: retorno.join("\n"),
+    content: `${"```"}${retorno.join("\n")}${"```"}`,
   });
 });
 
