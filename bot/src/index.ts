@@ -27,6 +27,8 @@ client.on("messageCreate", async (message) => {
   }
 
   const retorno: string[] = [];
+  retorno.push(`Gamer: ${userForSearch} - ${result.account.level}`);
+  retorno.push(`\n`);
   retorno.push(
     `${build({
       align: "Center",
@@ -179,11 +181,158 @@ client.on("messageCreate", async (message) => {
       value: String(result.global_stats.squad.matchesplayed),
     })}`
   );
-  // retorno.push(`|Top 1   | ${result.global_stats.solo.placetop1} | ${result.global_stats.duo.placetop1} | ${result.global_stats.trio.placetop1} | ${result.global_stats.squad.placetop1}`)
-  // retorno.push(`|Top 10  | ${result.global_stats.solo.placetop10} | ${result.global_stats.duo.placetop10} | ${result.global_stats.trio.placetop10} | ${result.global_stats.squad.placetop10}`)
-  // retorno.push(`|Top 25  | ${result.global_stats.solo.placetop25} | ${result.global_stats.duo.placetop25} | ${result.global_stats.trio.placetop25} | ${result.global_stats.squad.placetop25}`)
-  // retorno.push(`|Minutes | ${result.global_stats.solo.minutesplayed} | ${result.global_stats.duo.minutesplayed} | ${result.global_stats.trio.minutesplayed} | ${result.global_stats.squad.minutesplayed}`)
-  console.log(retorno.join('\n'))
+  retorno.push(
+    `${build({
+      align: "Center",
+      borderLeft: "|",
+      borderRight: "|",
+      caracteres: " ",
+      limit: 20,
+      value: "Top 1",
+    })}${build({
+      align: "Center",
+      borderLeft: "",
+      borderRight: "",
+      caracteres: " ",
+      limit: 20,
+      value: String(result.global_stats.solo.placetop1),
+    })}${build({
+      align: "Center",
+      borderLeft: "|",
+      borderRight: "|",
+      caracteres: " ",
+      limit: 20,
+      value: String(result.global_stats.duo.placetop1),
+    })}${build({
+      align: "Center",
+      borderLeft: "",
+      borderRight: "",
+      caracteres: " ",
+      limit: 20,
+      value: String(result.global_stats.trio.placetop1),
+    })}${build({
+      align: "Center",
+      borderLeft: "|",
+      borderRight: "|",
+      caracteres: " ",
+      limit: 20,
+      value: String(result.global_stats.squad.placetop1),
+    })}`
+  );
+  retorno.push(
+    `${build({
+      align: "Center",
+      borderLeft: "|",
+      borderRight: "|",
+      caracteres: " ",
+      limit: 20,
+      value: "Top 10",
+    })}${build({
+      align: "Center",
+      borderLeft: "",
+      borderRight: "",
+      caracteres: " ",
+      limit: 20,
+      value: String(result.global_stats.solo.placetop10),
+    })}${build({
+      align: "Center",
+      borderLeft: "|",
+      borderRight: "|",
+      caracteres: " ",
+      limit: 20,
+      value: String(result.global_stats.duo.placetop10),
+    })}${build({
+      align: "Center",
+      borderLeft: "",
+      borderRight: "",
+      caracteres: " ",
+      limit: 20,
+      value: String(result.global_stats.trio.placetop10),
+    })}${build({
+      align: "Center",
+      borderLeft: "|",
+      borderRight: "|",
+      caracteres: " ",
+      limit: 20,
+      value: String(result.global_stats.squad.placetop10),
+    })}`
+  );
+  retorno.push(
+    `${build({
+      align: "Center",
+      borderLeft: "|",
+      borderRight: "|",
+      caracteres: " ",
+      limit: 20,
+      value: "Top 25",
+    })}${build({
+      align: "Center",
+      borderLeft: "",
+      borderRight: "",
+      caracteres: " ",
+      limit: 20,
+      value: String(result.global_stats.solo.placetop25),
+    })}${build({
+      align: "Center",
+      borderLeft: "|",
+      borderRight: "|",
+      caracteres: " ",
+      limit: 20,
+      value: String(result.global_stats.duo.placetop25),
+    })}${build({
+      align: "Center",
+      borderLeft: "",
+      borderRight: "",
+      caracteres: " ",
+      limit: 20,
+      value: String(result.global_stats.trio.placetop25),
+    })}${build({
+      align: "Center",
+      borderLeft: "|",
+      borderRight: "|",
+      caracteres: " ",
+      limit: 20,
+      value: String(result.global_stats.squad.placetop25),
+    })}`
+  );
+  retorno.push(
+    `${build({
+      align: "Center",
+      borderLeft: "|",
+      borderRight: "|",
+      caracteres: " ",
+      limit: 20,
+      value: "Minutos",
+    })}${build({
+      align: "Center",
+      borderLeft: "",
+      borderRight: "",
+      caracteres: " ",
+      limit: 20,
+      value: String(result.global_stats.solo.minutesplayed),
+    })}${build({
+      align: "Center",
+      borderLeft: "|",
+      borderRight: "|",
+      caracteres: " ",
+      limit: 20,
+      value: String(result.global_stats.duo.minutesplayed),
+    })}${build({
+      align: "Center",
+      borderLeft: "",
+      borderRight: "",
+      caracteres: " ",
+      limit: 20,
+      value: String(result.global_stats.trio.minutesplayed),
+    })}${build({
+      align: "Center",
+      borderLeft: "|",
+      borderRight: "|",
+      caracteres: " ",
+      limit: 20,
+      value: String(result.global_stats.squad.minutesplayed),
+    })}`
+  );
 
   message.reply({
     content: `${"```"}${retorno.join("\n")}${"```"}`,
