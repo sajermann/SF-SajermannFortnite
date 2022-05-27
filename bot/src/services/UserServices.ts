@@ -11,8 +11,8 @@ export class UserServices implements IUserServices {
     if (!userId) {
       console.log("UserId não Cacheado");
       userId = await userRepository.getUserIdByUsername(username);
-      console.log('UserId', userId)
       if (userId) {
+        console.log('UserId', userId)
         myCache.set(username, userId, 10000);
       } else {
         console.log("UserId não encontrado");
