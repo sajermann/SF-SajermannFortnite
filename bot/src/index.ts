@@ -9,7 +9,7 @@ const client = new DiscordJs.Client({
 });
 
 client.on("ready", () => {
-  console.log("Bot Online porra");
+  console.log("Bot Online...");
 });
 
 client.on("messageCreate", async (message) => {
@@ -26,10 +26,11 @@ client.on("messageCreate", async (message) => {
     return;
   }
 
-  const retorno: string[] = [];
-  retorno.push(`Gamer: ${userForSearch} - ${result.account.level}`);
-  retorno.push(`\n`);
-  retorno.push(
+  const stringMounted: string[] = [];
+  stringMounted.push(`${"```"}`);
+    stringMounted.push(`Gamer: ${userForSearch} - ${result.account.level}`);
+  stringMounted.push(`\n`);
+  stringMounted.push(
     `${build({
       align: "Center",
       borderLeft: "|",
@@ -67,7 +68,7 @@ client.on("messageCreate", async (message) => {
       value: "Squad",
     })}`
   );
-  retorno.push(
+  stringMounted.push(
     `${build({
       align: "Center",
       borderLeft: "|",
@@ -105,7 +106,7 @@ client.on("messageCreate", async (message) => {
       value: String(result.global_stats.squad.kd),
     })}`
   );
-  retorno.push(
+  stringMounted.push(
     `${build({
       align: "Center",
       borderLeft: "|",
@@ -143,7 +144,7 @@ client.on("messageCreate", async (message) => {
       value: String(result.global_stats.squad.kills),
     })}`
   );
-  retorno.push(
+  stringMounted.push(
     `${build({
       align: "Center",
       borderLeft: "|",
@@ -181,7 +182,7 @@ client.on("messageCreate", async (message) => {
       value: String(result.global_stats.squad.matchesplayed),
     })}`
   );
-  retorno.push(
+  stringMounted.push(
     `${build({
       align: "Center",
       borderLeft: "|",
@@ -219,7 +220,7 @@ client.on("messageCreate", async (message) => {
       value: String(result.global_stats.squad.placetop1),
     })}`
   );
-  retorno.push(
+  stringMounted.push(
     `${build({
       align: "Center",
       borderLeft: "|",
@@ -257,7 +258,7 @@ client.on("messageCreate", async (message) => {
       value: String(result.global_stats.squad.placetop10),
     })}`
   );
-  retorno.push(
+  stringMounted.push(
     `${build({
       align: "Center",
       borderLeft: "|",
@@ -295,7 +296,7 @@ client.on("messageCreate", async (message) => {
       value: String(result.global_stats.squad.placetop25),
     })}`
   );
-  retorno.push(
+  stringMounted.push(
     `${build({
       align: "Center",
       borderLeft: "|",
@@ -333,9 +334,10 @@ client.on("messageCreate", async (message) => {
       value: String(result.global_stats.squad.minutesplayed),
     })}`
   );
+  stringMounted.push(`${"```"}`);
 
   message.reply({
-    content: `${"```"}${retorno.join("\n")}${"```"}`,
+    content: `${stringMounted.join("\n")}`,
   });
 });
 
