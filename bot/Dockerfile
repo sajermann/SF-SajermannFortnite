@@ -10,9 +10,9 @@ COPY . ./
 RUN npm install -g typescript
 RUN npm install -g eslint
 
-ENV TOKEN={{secrets.TOKEN}}
-ENV URL_FORTNITEAPI={{secrets.URL_FORTNITEAPI}}
-ENV TOKEN_FORTNITEAPI={{secrets.TOKEN_FORTNITEAPI}}
+ENV TOKEN={{TOKEN}}
+ENV URL_FORTNITEAPI={{URL_FORTNITEAPI}}
+ENV TOKEN_FORTNITEAPI={{TOKEN_FORTNITEAPI}}
 RUN npm run build
 
 CMD ["node", "./build/src/index.js"]
