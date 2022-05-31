@@ -4,8 +4,8 @@ services:
     image: "ghcr.io/sajermann/sf-sajermannfortnite/bot:latest"
     restart: always
     build: .
-    # environment:
-    #   TOKEN: "${secrets.TOKEN}"
-    #   URL_FORTNITEAPI: "${secrets.URL_FORTNITEAPI}"
-    #   TOKEN_FORTNITEAPI: "${secrets.TOKEN_FORTNITEAPI}"
+    environment:
+      TOKEN: ${{ secrets.TOKEN }}
+      URL_FORTNITEAPI: ${{ secrets.URL_FORTNITEAPI }}
+      TOKEN_FORTNITEAPI: ${{ secrets.TOKEN_FORTNITEAPI }}
 
