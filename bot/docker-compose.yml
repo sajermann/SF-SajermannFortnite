@@ -5,7 +5,7 @@ services:
     restart: always
     build: .
     environment:
-      - TOKEN={{secrets.TOKEN}}
-      - URL_FORTNITEAPI={{secrets.URL_FORTNITEAPI}}
-      - TOKEN_FORTNITEAPI={{secrets.TOKEN_FORTNITEAPI}}
+      - TOKEN=${{secrets.TOKEN}}
+      - URL_FORTNITEAPI=${{secrets.URL_FORTNITEAPI}}
+      - TOKEN_FORTNITEAPI=${{secrets.TOKEN_FORTNITEAPI}}
 
