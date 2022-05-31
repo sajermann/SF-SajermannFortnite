@@ -13,7 +13,8 @@ RUN npm install -g eslint
 ENV TOKEN={{TOKEN}}
 ENV URL_FORTNITEAPI={{URL_FORTNITEAPI}}
 ENV TOKEN_FORTNITEAPI={{TOKEN_FORTNITEAPI}}
-ARG BRUNO
+ENV BRUNO={{BRUNO}}
+
 RUN npm run build
 
 CMD ["node", "./build/src/index.js"]
