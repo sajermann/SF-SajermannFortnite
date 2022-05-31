@@ -1,4 +1,4 @@
-version: "3"
+version: "3.8"
 services:
   sajermann-fornite:
     image: "ghcr.io/sajermann/sf-sajermannfortnite/bot:latest"
