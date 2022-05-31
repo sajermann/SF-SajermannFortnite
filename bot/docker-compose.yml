@@ -8,5 +8,6 @@ services:
       - TOKEN={{ secrets.TOKEN }}
       - URL_FORTNITEAPI={{ secrets.URL_FORTNITEAPI }}
       - TOKEN_FORTNITEAPI={{ secrets.TOKEN_FORTNITEAPI }}
-      - BRUNO=SAJERMANN
+    args:
+    BRUNO: SAJERMANN
 
