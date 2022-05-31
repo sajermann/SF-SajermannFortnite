@@ -10,13 +10,15 @@ COPY . ./
 RUN npm install -g typescript
 RUN npm install -g eslint
 
+ARG batata
+
 RUN echo "Porra: ${TOKEN}"
-RUN echo "Porra: ${{TOKEN}}"
+RUN echo "Porra: ${batata}"
 
 ENV TOKEN={{TOKEN}}
 ENV URL_FORTNITEAPI={{URL_FORTNITEAPI}}
 ENV TOKEN_FORTNITEAPI={{TOKEN_FORTNITEAPI}}
-ENV BRUNO={{BRUNO}}
+ENV BRUNO={{batata}}
 
 RUN npm run build
 

@@ -3,7 +3,10 @@ services:
   sajermann-fornite:
     image: "ghcr.io/sajermann/sf-sajermannfortnite/bot:latest"
     restart: always
-    build: .
+    build:
+      context: .
+      args: 
+      batata: "frita"
     environment:
       - TOKEN={{ secrets.TOKEN }}
       - URL_FORTNITEAPI={{ secrets.URL_FORTNITEAPI }}
