@@ -4,9 +4,12 @@ import {
   AxiosRequestConfig,
   AxiosInstance,
 } from "axios";
+import dotenv from "dotenv";
+dotenv.config();
 
 export default function Interceptor(api: AxiosInstance) {
-  console.log('Aqui Bruno', api.interceptors.response)
+  console.log('Aqui Bruno', api.interceptors.response);
+  console.log('Variaveis', process.env);
   api.interceptors.response.use(
     (response: AxiosResponse) => response,
     async (error: AxiosError) => {
