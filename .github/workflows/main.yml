@@ -25,7 +25,15 @@ jobs:
       uses: jacobtomlinson/gha-find-replace@v2
       with:
         find: "{{secrets.TOKEN}}"
-        replace: "desenvolvimento"
+        replace: "{{secrets.TOKEN}}"
+        regex: false
+      with:
+        find: "{{secrets.URL_FORTNITEAPI}}"
+        replace: "{{secrets.URL_FORTNITEAPI}}"
+        regex: false
+      with:
+        find: "{{secrets.TOKEN_FORTNITEAPI}}"
+        replace: "{{secrets.TOKEN_FORTNITEAPI}}"
         regex: false
     
     # Build Bot 
