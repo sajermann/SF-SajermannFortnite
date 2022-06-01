@@ -27,14 +27,19 @@ jobs:
         find: "{{secrets.TOKEN}}"
         replace: "{{secrets.TOKEN}}"
         regex: false
+        include: docker-compose.yml
+      uses: jacobtomlinson/gha-find-replace@v2
       with:
         find: "{{secrets.URL_FORTNITEAPI}}"
         replace: "{{secrets.URL_FORTNITEAPI}}"
         regex: false
+        include: docker-compose.yml
+      uses: jacobtomlinson/gha-find-replace@v2
       with:
         find: "{{secrets.TOKEN_FORTNITEAPI}}"
         replace: "{{secrets.TOKEN_FORTNITEAPI}}"
         regex: false
+        include: docker-compose.yml
     
     # Build Bot 
     - run: |
