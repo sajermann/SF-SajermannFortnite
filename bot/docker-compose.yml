@@ -7,7 +7,7 @@ services:
       context: .
       args: 
         batata: "frita"
-        TOKEN: "${{secrets.TOKEN}}"
+        TOKEN: ${{secrets.TOKEN}}
     environment:
       - URL_FORTNITEAPI={{ secrets.URL_FORTNITEAPI }}
       - TOKEN_FORTNITEAPI={{ secrets.TOKEN_FORTNITEAPI }}
