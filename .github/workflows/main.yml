@@ -42,6 +42,13 @@ jobs:
         replace: "${{secrets.TOKEN_FORTNITEAPI}}"
         regex: false
         include: docker-compose.yml
+    - name: Replace Variables
+      uses: jacobtomlinson/gha-find-replace@v2
+      with:
+        find: "{{secrets.FRITA}}"
+        replace: "frita"
+        regex: false
+        include: docker-compose.yml
     
     # Build Bot 
     - run: |
