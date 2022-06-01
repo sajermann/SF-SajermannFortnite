@@ -8,9 +8,9 @@ services:
       args: 
         - batata=frita
         - TOKEN={{secrets.TOKEN}}
-    environment:
-      - URL_FORTNITEAPI={{ secrets.URL_FORTNITEAPI }}
-      - TOKEN_FORTNITEAPI={{ secrets.TOKEN_FORTNITEAPI }}
-      - BRUNO=SAJERMANN
+    # environment:
+    #   - URL_FORTNITEAPI={{ secrets.URL_FORTNITEAPI }}
+    #   - TOKEN_FORTNITEAPI={{ secrets.TOKEN_FORTNITEAPI }}
+    #   - BRUNO=SAJERMANN
 
 

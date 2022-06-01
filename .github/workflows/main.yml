@@ -20,6 +20,13 @@ jobs:
         login-server: ghcr.io
         username: ${{ secrets.GH_PACKAGES_USERNAME }}
         password: ${{ secrets.GH_PACKAGES_TOKEN }}
+
+    - name: Alteração Backend
+      uses: jacobtomlinson/gha-find-replace@v2
+      with:
+      find: "{{secrets.TOKEN}}"
+      replace: "desenvolvimento"
+      regex: false
     
     # Build Bot 
     - run: |
