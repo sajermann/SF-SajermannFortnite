@@ -48,7 +48,6 @@ jobs:
         find: "{{secrets.FRITA}}"
         replace: "frita"
         regex: false
-        include: docker-compose.yml
     
     # Build Bot 
     - run: |
