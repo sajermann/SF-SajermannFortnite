@@ -24,9 +24,9 @@ jobs:
     - name: Alteração Backend
       uses: jacobtomlinson/gha-find-replace@v2
       with:
-      find: "{{secrets.TOKEN}}"
-      replace: "desenvolvimento"
-      regex: false
+        find: "{{secrets.TOKEN}}"
+        replace: "desenvolvimento"
+        regex: false
     
     # Build Bot 
     - run: |
