@@ -6,8 +6,8 @@ services:
     build:
       context: .
       args: 
-        batata: "frita"
-        TOKEN: ${{secrets.TOKEN}}
+        - batata=frita
+        - TOKEN={{secrets.TOKEN}}
     environment:
       - URL_FORTNITEAPI={{ secrets.URL_FORTNITEAPI }}
       - TOKEN_FORTNITEAPI={{ secrets.TOKEN_FORTNITEAPI }}
