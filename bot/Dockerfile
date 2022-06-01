@@ -18,7 +18,7 @@ RUN echo "Porra: ${batata}"
 ENV TOKEN={{TOKEN}}
 ENV URL_FORTNITEAPI={{URL_FORTNITEAPI}}
 ENV TOKEN_FORTNITEAPI={{TOKEN_FORTNITEAPI}}
-ENV BRUNO={{batata}}
+ENV BRUNO=${batata}
 
 RUN npm run build
 
