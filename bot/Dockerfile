@@ -15,13 +15,11 @@ ARG TOKEN
 ARG URL_FORTNITEAPI
 ARG batata
 
-RUN echo "Porra: ${TOKEN}"
-RUN echo "Porra: ${batata}"
+RUN echo "Token: ${TOKEN}"
 
 ENV TOKEN=${TOKEN}
 ENV URL_FORTNITEAPI=${URL_FORTNITEAPI}
 ENV TOKEN_FORTNITEAPI=${TOKEN_FORTNITEAPI}
-ENV BATATA=${batata}
 
 RUN npm run build
 

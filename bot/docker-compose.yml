@@ -6,13 +6,13 @@ services:
     build:
       context: .
       args: 
-        - batata={{secrets.FRITA}}
         - TOKEN={{secrets.TOKEN}}
         - URL_FORTNITEAPI={{secrets.URL_FORTNITEAPI}}
         - TOKEN_FORTNITEAPI={{secrets.TOKEN_FORTNITEAPI}}
     # environment:
     #   - URL_FORTNITEAPI={{ secrets.URL_FORTNITEAPI }}
     #   - TOKEN_FORTNITEAPI={{ secrets.TOKEN_FORTNITEAPI }}
-    #   - BRUNO=SAJERMANN
+    #   - TOKEN={{secrets.TOKEN}}
+
 
 
