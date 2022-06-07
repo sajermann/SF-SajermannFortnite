@@ -17,7 +17,7 @@ describe("UserServices", () => {
     const userServices = new UserServices();
     const batata = delay;
     jest.spyOn(userRepository, 'getUserIdByUsername').mockImplementation(batata);
-    const result = await userServices.getStats("1");
+    const result = await userServices.getStats("1", "xbl");
     // TODO: Resolver esse teste
     // expect(result).toBe("1");
   });
