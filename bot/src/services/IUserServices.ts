@@ -1,3 +1,3 @@
 export interface IUserServices {
-  getStats: (data: string) => Promise<object | null>;
+  getStats: (data: string, platform: string) => Promise<object | null>;
 }

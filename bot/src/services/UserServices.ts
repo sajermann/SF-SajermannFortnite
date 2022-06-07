@@ -5,15 +5,15 @@ const myCache = new NodeCache();
 
 export class UserServices implements IUserServices {
   constructor() {}
-  async getStats(username: string): Promise<object | null>{
+  async getStats(username: string, platform: string): Promise<object | null>{
     const userRepository = new UserRepository();
-    let userId = myCache.get(username) as string | null;
+    let userId = myCache.get(`${username}-${platform}`) as string | null;
     if (!userId) {
       console.log("UserId não Cacheado");
-      userId = await userRepository.getUserIdByUsername(username);
+      userId = await userRepository.getUserIdByUsername(username, platform);
       if (userId) {
         console.log('UserId', userId)
-        myCache.set(username, userId, 10000);
+        myCache.set(`${username}-${platform}`, userId, 10000);
       } else {
         console.log("UserId não encontrado");
         return null;
