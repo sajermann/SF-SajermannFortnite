@@ -1,10 +1,11 @@
 import fs from 'fs';
 import DiscordJs, { Intents } from 'discord.js';
 import dotenv from 'dotenv';
+import path from 'path';
 import { UserServices } from './services/UserServices';
 
 const HTML = fs
-	.readFileSync(`${__dirname}\\template\\index.html`, 'utf8')
+	.readFileSync(path.resolve(__dirname, 'template', 'index.html'), 'utf8')
 	.toString();
 
 dotenv.config();
