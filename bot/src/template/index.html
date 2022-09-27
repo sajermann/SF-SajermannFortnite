@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      color: #B9BBBE;
+    }
+
+    body {
+      background-color: #36393F;
+      max-width: 650px;
+    }
+
+    .container {
+      margin: auto;
+      width: 600px;
+      padding: 20px;
+    }
+
+    .title {
+      color: #B9BBBE;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    table {
+      border: 1px solid;
+      border-collapse: collapse;
+      background-color: #2F3136;
+    }
+
+    tr {
+      height: 30px;
+    }
+
+    .firstColumn {
+      width: 110px;
+      min-width: 110px;
+      max-width: 110px;
+      border: 1px solid;
+      padding-left: 5px;
+    }
+
+    .columns {
+      width: 120px;
+      min-width: 120px;
+      max-width: 120px;
+      border: 1px solid;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h2 class="title">Gamer: {{gamer}} - Nível {{level}}</h2>
+    <table class="editorDemoTable" style="height: 156px; width: 584px;" width="693">
+      <thead>
+        <tr>
+          <td class="firstColumn"><strong>Stats</strong></td>
+          <td class="columns"><strong>Solo</strong></td>
+          <td class="columns"><strong>Dupla</strong></td>
+          <td class="columns"><strong>Trio</strong></td>
+          <td class="columns"><strong>Squad</strong></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="firstColumn"><strong>KD</strong></td>
+          <td class="columns">{{kdSolo}}</td>
+          <td class="columns">{{kdDuo}}</td>
+          <td class="columns">{{kdTrio}}</td>
+          <td class="columns">{{kdSquad}}</td>
+        </tr>
+        <tr>
+          <td class="firstColumn"><strong>Kills</strong></td>
+          <td class="columns">{{killsSolo}}</td>
+          <td class="columns">{{killsDuo}}</td>
+          <td class="columns">{{killsTrio}}</td>
+          <td class="columns">{{killsSquad}}</td>
+        </tr>
+        <tr>
+          <td class="firstColumn"><strong>Matches</strong></td>
+          <td class="columns">{{matchesSolo}}</td>
+          <td class="columns">{{matchesDuo}}</td>
+          <td class="columns">{{matchesTrio}}</td>
+          <td class="columns">{{matchesSquad}}</td>
+        </tr>
+        <tr>
+          <td class="firstColumn"><strong>Top 1</strong></td>
+          <td class="columns">{{top1Solo}}</td>
+          <td class="columns">{{top1Duo}}</td>
+          <td class="columns">{{top1Trio}}</td>
+          <td class="columns">{{top1Squad}}</td>
+        </tr>
+        <tr>
+          <td class="firstColumn"><strong>Top 10</strong></td>
+          <td class="columns">{{top10Solo}}</td>
+          <td class="columns">{{top10Duo}}</td>
+          <td class="columns">{{top10Trio}}</td>
+          <td class="columns">{{top10Squad}}</td>
+        </tr>
+        <tr>
+          <td class="firstColumn"><strong>Top 25</strong></td>
+          <td class="columns">{{top25Solo}}</td>
+          <td class="columns">{{top25Duo}}</td>
+          <td class="columns">{{top25Trio}}</td>
+          <td class="columns">{{top25Squad}}</td>
+        </tr>
+        <tr>
+          <td class="firstColumn"><strong>Minutos</strong></td>
+          <td class="columns">{{minutesSolo}}</td>
+          <td class="columns">{{minutesDuo}}</td>
+          <td class="columns">{{minutesTrio}}</td>
+          <td class="columns">{{minutesSquad}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+
+</html>

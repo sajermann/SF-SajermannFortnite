@@ -1,8 +1,6 @@
-import DiscordJs, {
-  CommandInteractionOptionResolver,
-  Intents,
-  MessageEmbed,
-} from "discord.js";
+import nodeHtmlToImage from "node-html-to-image";
+import fs from "fs";
+import DiscordJs, { Intents, BufferResolvable } from "discord.js";
 import dotenv from "dotenv";
 import { UserServices } from "./services/UserServices";
 import build from "./utils";
@@ -33,321 +31,57 @@ client.on("messageCreate", async (message) => {
       return;
     }
 
-    // console.log(result.global_stats)
-    // console.log(result.global_stats.trio)
-    // console.log(result.global_stats.trio.kd)
-    const stringMounted: string[] = [];
-    stringMounted.push(`${"```"}`);
-    stringMounted.push(`Gamer: ${userForSearch} - ${result.account.level}`);
-    stringMounted.push(`\n`);
-    stringMounted.push(
-      `${build({
-        align: "Center",
-        borderLeft: "|",
-        borderRight: "|",
-        caracteres: " ",
-        limit: 20,
-        value: "Stats",
-      })}${build({
-        align: "Center",
-        borderLeft: "",
-        borderRight: "",
-        caracteres: " ",
-        limit: 20,
-        value: "Solo",
-      })}${build({
-        align: "Center",
-        borderLeft: "|",
-        borderRight: "|",
-        caracteres: " ",
-        limit: 20,
-        value: "Dupla",
-      })}${build({
-        align: "Center",
-        borderLeft: "",
-        borderRight: "",
-        caracteres: " ",
-        limit: 20,
-        value: "Trio",
-      })}${build({
-        align: "Center",
-        borderLeft: "|",
-        borderRight: "|",
-        caracteres: " ",
-        limit: 20,
-        value: "Squad",
-      })}`
+    const batataCreme = (await nodeHtmlToImage({
+      html: fs
+        .readFileSync(__dirname + "\\template\\index.html", "utf8")
+        .toString(),
+      content: {
+        gamer: userForSearch,
+        level: result.account.level,
+        kdSolo: String(result.global_stats.solo?.kd || 0),
+        kdDuo: String(result.global_stats.duo?.kd || 0),
+        kdTrio: String(result.global_stats.trio?.kd || 0),
+        kdSquad: String(result.global_stats.squad?.kd || 0),
+
+        killsSolo: String(result.global_stats.solo?.kills || 0),
+        killsDuo: String(result.global_stats.duo?.kills || 0),
+        killsTrio: String(result.global_stats.trio?.kills || 0),
+        killsSquad: String(result.global_stats.squad?.kills || 0),
+
+        matchesSolo: String(result.global_stats.solo?.matchesplayed || 0),
+        matchesDuo: String(result.global_stats.duo?.matchesplayed || 0),
+        matchesTrio: String(result.global_stats.trio?.matchesplayed || 0),
+        matchesSquad: String(result.global_stats.squad?.matchesplayed || 0),
+
+        top1Solo: String(result.global_stats.solo?.placetop1 || 0),
+        top1Duo: String(result.global_stats.duo?.placetop1 || 0),
+        top1Trio: String(result.global_stats.trio?.placetop1 || 0),
+        top1Squad: String(result.global_stats.squad?.placetop1 || 0),
+
+        top10Solo: String(result.global_stats.solo?.placetop10 || 0),
+        top10Duo: String(result.global_stats.duo?.placetop10 || 0),
+        top10Trio: String(result.global_stats.trio?.placetop10 || 0),
+        top10Squad: String(result.global_stats.squad?.placetop10 || 0),
+
+        top25Solo: String(result.global_stats.solo?.placetop25 || 0),
+        top25Duo: String(result.global_stats.duo?.placetop25 || 0),
+        top25Trio: String(result.global_stats.trio?.placetop25 || 0),
+        top25Squad: String(result.global_stats.squad?.placetop25 || 0),
+
+        minutesSolo: String(result.global_stats.solo?.minutesplayed || 0),
+        minutesDuo: String(result.global_stats.duo?.minutesplayed || 0),
+        minutesTrio: String(result.global_stats.trio?.minutesplayed || 0),
+        minutesSquad: String(result.global_stats.squad?.minutesplayed || 0),
+      },
+    })) as Buffer[];
+
+    const sfattach = new DiscordJs.MessageAttachment(
+      batataCreme as unknown as BufferResolvable,
+      "output.png"
     );
-    stringMounted.push(
-      `${build({
-        align: "Center",
-        borderLeft: "|",
-        borderRight: "|",
-        caracteres: " ",
-        limit: 20,
-        value: "KD",
-      })}${build({
-        align: "Center",
-        borderLeft: "",
-        borderRight: "",
-        caracteres: " ",
-        limit: 20,
-        value: String(result.global_stats.solo?.kd || 0),
-      })}${build({
-        align: "Center",
-        borderLeft: "|",
-        borderRight: "|",
-        caracteres: " ",
-        limit: 20,
-        value: String(result.global_stats.duo?.kd || 0),
-      })}${build({
-        align: "Center",
-        borderLeft: "",
-        borderRight: "",
-        caracteres: " ",
-        limit: 20,
-        value: String(result.global_stats.trio?.kd || 0),
-      })}${build({
-        align: "Center",
-        borderLeft: "|",
-        borderRight: "|",
-        caracteres: " ",
-        limit: 20,
-        value: String(result.global_stats.squad?.kd || 0),
-      })}`
-    );
-    stringMounted.push(
-      `${build({
-        align: "Center",
-        borderLeft: "|",
-        borderRight: "|",
-        caracteres: " ",
-        limit: 20,
-        value: "Kills",
-      })}${build({
-        align: "Center",
-        borderLeft: "",
-        borderRight: "",
-        caracteres: " ",
-        limit: 20,
-        value: String(result.global_stats.solo?.kills || 0),
-      })}${build({
-        align: "Center",
-        borderLeft: "|",
-        borderRight: "|",
-        caracteres: " ",
-        limit: 20,
-        value: String(result.global_stats.duo?.kills || 0),
-      })}${build({
-        align: "Center",
-        borderLeft: "",
-        borderRight: "",
-        caracteres: " ",
-        limit: 20,
-        value: String(result.global_stats.trio?.kills || 0),
-      })}${build({
-        align: "Center",
-        borderLeft: "|",
-        borderRight: "|",
-        caracteres: " ",
-        limit: 20,
-        value: String(result.global_stats.squad?.kills || 0),
-      })}`
-    );
-    stringMounted.push(
-      `${build({
-        align: "Center",
-        borderLeft: "|",
-        borderRight: "|",
-        caracteres: " ",
-        limit: 20,
-        value: "Matchs",
-      })}${build({
-        align: "Center",
-        borderLeft: "",
-        borderRight: "",
-        caracteres: " ",
-        limit: 20,
-        value: String(result.global_stats.solo?.matchesplayed || 0),
-      })}${build({
-        align: "Center",
-        borderLeft: "|",
-        borderRight: "|",
-        caracteres: " ",
-        limit: 20,
-        value: String(result.global_stats.duo?.matchesplayed || 0),
-      })}${build({
-        align: "Center",
-        borderLeft: "",
-        borderRight: "",
-        caracteres: " ",
-        limit: 20,
-        value: String(result.global_stats.trio?.matchesplayed || 0),
-      })}${build({
-        align: "Center",
-        borderLeft: "|",
-        borderRight: "|",
-        caracteres: " ",
-        limit: 20,
-        value: String(result.global_stats.squad?.matchesplayed || 0),
-      })}`
-    );
-    stringMounted.push(
-      `${build({
-        align: "Center",
-        borderLeft: "|",
-        borderRight: "|",
-        caracteres: " ",
-        limit: 20,
-        value: "Top 1",
-      })}${build({
-        align: "Center",
-        borderLeft: "",
-        borderRight: "",
-        caracteres: " ",
-        limit: 20,
-        value: String(result.global_stats.solo?.placetop1 || 0),
-      })}${build({
-        align: "Center",
-        borderLeft: "|",
-        borderRight: "|",
-        caracteres: " ",
-        limit: 20,
-        value: String(result.global_stats.duo?.placetop1 || 0),
-      })}${build({
-        align: "Center",
-        borderLeft: "",
-        borderRight: "",
-        caracteres: " ",
-        limit: 20,
-        value: String(result.global_stats.trio?.placetop1 || 0),
-      })}${build({
-        align: "Center",
-        borderLeft: "|",
-        borderRight: "|",
-        caracteres: " ",
-        limit: 20,
-        value: String(result.global_stats.squad?.placetop1 || 0),
-      })}`
-    );
-    stringMounted.push(
-      `${build({
-        align: "Center",
-        borderLeft: "|",
-        borderRight: "|",
-        caracteres: " ",
-        limit: 20,
-        value: "Top 10",
-      })}${build({
-        align: "Center",
-        borderLeft: "",
-        borderRight: "",
-        caracteres: " ",
-        limit: 20,
-        value: String(result.global_stats.solo?.placetop10 || 0),
-      })}${build({
-        align: "Center",
-        borderLeft: "|",
-        borderRight: "|",
-        caracteres: " ",
-        limit: 20,
-        value: String(result.global_stats.duo?.placetop10 || 0),
-      })}${build({
-        align: "Center",
-        borderLeft: "",
-        borderRight: "",
-        caracteres: " ",
-        limit: 20,
-        value: String(result.global_stats.trio?.placetop10 || 0),
-      })}${build({
-        align: "Center",
-        borderLeft: "|",
-        borderRight: "|",
-        caracteres: " ",
-        limit: 20,
-        value: String(result.global_stats.squad?.placetop10 || 0),
-      })}`
-    );
-    stringMounted.push(
-      `${build({
-        align: "Center",
-        borderLeft: "|",
-        borderRight: "|",
-        caracteres: " ",
-        limit: 20,
-        value: "Top 25",
-      })}${build({
-        align: "Center",
-        borderLeft: "",
-        borderRight: "",
-        caracteres: " ",
-        limit: 20,
-        value: String(result.global_stats.solo?.placetop25 || 0),
-      })}${build({
-        align: "Center",
-        borderLeft: "|",
-        borderRight: "|",
-        caracteres: " ",
-        limit: 20,
-        value: String(result.global_stats.duo?.placetop25 || 0),
-      })}${build({
-        align: "Center",
-        borderLeft: "",
-        borderRight: "",
-        caracteres: " ",
-        limit: 20,
-        value: String(result.global_stats.trio?.placetop25 || 0),
-      })}${build({
-        align: "Center",
-        borderLeft: "|",
-        borderRight: "|",
-        caracteres: " ",
-        limit: 20,
-        value: String(result.global_stats.squad?.placetop25 || 0),
-      })}`
-    );
-    stringMounted.push(
-      `${build({
-        align: "Center",
-        borderLeft: "|",
-        borderRight: "|",
-        caracteres: " ",
-        limit: 20,
-        value: "Minutos",
-      })}${build({
-        align: "Center",
-        borderLeft: "",
-        borderRight: "",
-        caracteres: " ",
-        limit: 20,
-        value: String(result.global_stats.solo?.minutesplayed || 0),
-      })}${build({
-        align: "Center",
-        borderLeft: "|",
-        borderRight: "|",
-        caracteres: " ",
-        limit: 20,
-        value: String(result.global_stats.duo?.minutesplayed || 0),
-      })}${build({
-        align: "Center",
-        borderLeft: "",
-        borderRight: "",
-        caracteres: " ",
-        limit: 20,
-        value: String(result.global_stats.trio?.minutesplayed || 0),
-      })}${build({
-        align: "Center",
-        borderLeft: "|",
-        borderRight: "|",
-        caracteres: " ",
-        limit: 20,
-        value: String(result.global_stats.squad?.minutesplayed || 0),
-      })}`
-    );
-    stringMounted.push(`${"```"}`);
 
     message.reply({
-      content: `${stringMounted.join("\n")}`,
+      files: [sfattach],
     });
   } catch (e) {
     console.log("Erro na função stats: " + e);
