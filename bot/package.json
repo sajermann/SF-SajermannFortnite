@@ -5,8 +5,10 @@
   "main": "./src/index.js",
   "scripts": {
     "test": "jest --coverage",
-    "start": "ts-node src/index.ts",
-    "build": "npx tsc"
+    "start": "tsnd --exit-child src/index.ts",
+    "build": "npx tsc",
+    "copyRequiredsWindows": "@powershell mkdir './build/src/template/' && @powershell copy './src/template/index.html' './build/src/template/index.html'",
+    "copyRequiredsLinux": "mkdir './build/src/template/' && cp './src/template/index.html' './build/src/template/index.html'"
   },
   "keywords": [],
   "author": "",
@@ -22,7 +24,7 @@
     "dotenv": "^16.0.1",
     "node-cache": "^5.1.2",
     "node-html-to-image": "^3.2.4",
-    "ts-node": "^10.8.0",
+    "ts-node-dev": "^2.0.0",
     "typescript": "^4.6.4"
   }
 }

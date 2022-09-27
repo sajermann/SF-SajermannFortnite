@@ -31,6 +31,8 @@ client.on("messageCreate", async (message) => {
       return;
     }
 
+    console.log('Bruno Sajermann')
+
     const batataCreme = (await nodeHtmlToImage({
       html: fs
         .readFileSync(__dirname + "\\template\\index.html", "utf8")

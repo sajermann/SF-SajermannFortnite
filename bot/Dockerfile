@@ -22,5 +22,6 @@ ENV URL_FORTNITEAPI=${URL_FORTNITEAPI}
 ENV TOKEN_FORTNITEAPI=${TOKEN_FORTNITEAPI}
 
 RUN npm run build
+RUN npm run copyRequiredsLinux
 
 CMD ["node", "./build/src/index.js"]
