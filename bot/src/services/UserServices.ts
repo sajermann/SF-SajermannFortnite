@@ -69,6 +69,10 @@ export class UserServices implements IUserServices {
 				minutesTrio: String(result.global_stats.trio?.minutesplayed || 0),
 				minutesSquad: String(result.global_stats.squad?.minutesplayed || 0),
 			},
+			puppeteerArgs: {
+				args: ['--no-sandbox', '--disable-setuid-sandbox'],
+			}
+
 		})) as Buffer[];
 
 		const sfattach = new DiscordJs.MessageAttachment(
