@@ -17,20 +17,6 @@ jobs:
         id: date
         run: echo "CURRENT_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")" >> $GITHUB_ENV
 
-      - name: Increment version and update lastUpdate prop
-        uses: jossef/action-set-json-field@v2.1
-        with:
-          file: bot/package.json
-          field: version
-          value: ${{ steps.increment-version.outputs.new_version }}
-
-      - name: Update lastUpdate prop
-        uses: jossef/action-set-json-field@v2.1
-        with:
-          file: bot/package.json
-          field: lastUpdate
-          value: ${{ env.CURRENT_DATE }}
-
       - name: Get current version
         id: get-version
         uses: jaywcjlove/github-action-package@main
@@ -53,6 +39,13 @@ jobs:
           file: bot/package.json
           field: version
           value: ${{ steps.increment-version.outputs.new_version }}
+
+      - name: Update lastUpdate prop
+        uses: jossef/action-set-json-field@v2.1
+        with:
+          file: bot/package.json
+          field: lastUpdate
+          value: ${{ env.CURRENT_DATE }}
 
       - name: Commit changes
         run: |
