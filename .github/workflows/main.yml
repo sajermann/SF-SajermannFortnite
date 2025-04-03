@@ -1,0 +1,56 @@
+name: Update Version
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'bot/**'
+
+jobs:
+  update-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Get Current Date
+        id: date
+        run: echo "CURRENT_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")" >> $GITHUB_ENV
+
+      - name: Get current version
+        id: get-version
+        uses: jaywcjlove/github-action-package@main
+        with:
+          path: bot/package.json
+
+      - name: Up version
+        id: increment-version
+        run: |
+          CURRENT_VERSION=${{ steps.get-version.outputs.version }}
+          # Incrementa a versão patch (último número)
+          IFS='.' read -ra VERSION_PARTS <<< "$CURRENT_VERSION"
+          PATCH=$((VERSION_PARTS[2] + 1))
+          NEW_VERSION="${VERSION_PARTS[0]}.${VERSION_PARTS[1]}.$PATCH"
+          echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
+
+      - name: Update Version
+        uses: jossef/action-set-json-field@v2.1
+        with:
+          file: bot/package.json
+          field: version
+          value: ${{ steps.increment-version.outputs.new_version }}
+
+      - name: Update lastUpdate prop
+        uses: jossef/action-set-json-field@v2.1
+        with:
+          file: bot/package.json
+          field: lastUpdate
+          value: ${{ env.CURRENT_DATE }}
+
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add bot/package.json
+          git commit -m "chore: update version for ${{ steps.increment-version.outputs.new_version }}"
+          git push
