@@ -1,59 +1,63 @@
-name: CI-SajermannFortnite
-
+name: Update Version
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ main ]
-    
-  workflow_dispatch:
-
+    branches:
+      - main
+    paths:
+      - 'bot/**'
 
 jobs:
-  build:
+  update-version:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - uses: azure/docker-login@v1
-      with:
-        login-server: ghcr.io
-        username: ${{ secrets.GH_PACKAGES_USERNAME }}
-        password: ${{ secrets.GH_PACKAGES_TOKEN }}
+      - name: Get Current Date
+        id: date
+        run: echo "CURRENT_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")" >> $GITHUB_ENV
 
-    - name: Replace Variables
-      uses: jacobtomlinson/gha-find-replace@v2
-      with:
-        find: "{{secrets.TOKEN}}"
-        replace: "${{secrets.TOKEN}}"
-        regex: false
-        include: "**docker-compose.yml"
-    - name: Replace Variables
-      uses: jacobtomlinson/gha-find-replace@v2
-      with:
-        find: "{{secrets.URL_FORTNITEAPI}}"
-        replace: "${{secrets.URL_FORTNITEAPI}}"
-        regex: false
-        include: "**docker-compose.yml"
-    - name: Replace Variables
-      uses: jacobtomlinson/gha-find-replace@v2
-      with:
-        find: "{{secrets.TOKEN_FORTNITEAPI}}"
-        replace: "${{secrets.TOKEN_FORTNITEAPI}}"
-        regex: false
-        include: "**docker-compose.yml"
-    - name: Replace Variables
-      uses: jacobtomlinson/gha-find-replace@v2
-      with:
-        find: "{{secrets.FRITA}}"
-        replace: "frita"
-        regex: false
-    
-    # Build Bot 
-    - run: |
-        docker-compose -f bot/docker-compose.yml build 
-        ls
-        docker tag ghcr.io/sajermann/sf-sajermannfortnite/bot:latest ghcr.io/sajermann/sf-sajermannfortnite/bot:${{ github.sha }}
-    - run: |
-        docker push ghcr.io/sajermann/sf-sajermannfortnite/bot:latest
-        docker push ghcr.io/sajermann/sf-sajermannfortnite/bot:${{ github.sha }}
+      - name: Increment version and update lastUpdate prop
+        uses: jossef/action-set-json-field@v2.1
+        with:
+          file: bot/package.json
+          field: version
+          value: ${{ steps.increment-version.outputs.new_version }}
+
+      - name: Update lastUpdate prop
+        uses: jossef/action-set-json-field@v2.1
+        with:
+          file: bot/package.json
+          field: lastUpdate
+          value: ${{ env.CURRENT_DATE }}
+
+      - name: Get current version
+        id: get-version
+        uses: jaywcjlove/github-action-package@main
+        with:
+          path: bot/package.json
+
+      - name: Up version
+        id: increment-version
+        run: |
+          CURRENT_VERSION=${{ steps.get-version.outputs.version }}
+          # Incrementa a versão patch (último número)
+          IFS='.' read -ra VERSION_PARTS <<< "$CURRENT_VERSION"
+          PATCH=$((VERSION_PARTS[2] + 1))
+          NEW_VERSION="${VERSION_PARTS[0]}.${VERSION_PARTS[1]}.$PATCH"
+          echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
+
+      - name: Update Version
+        uses: jossef/action-set-json-field@v2.1
+        with:
+          file: bot/package.json
+          field: version
+          value: ${{ steps.increment-version.outputs.new_version }}
+
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add bot/package.json
+          git commit -m "chore: update version for ${{ steps.increment-version.outputs.new_version }}"
+          git push
