@@ -8,14 +8,11 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export default function Interceptor(api: AxiosInstance) {
-  console.log('Aqui Bruno', api.interceptors.response);
-  console.log('Variaveis', process.env);
   api.interceptors.response.use(
     (response: AxiosResponse) => response,
     async (error: AxiosError) => {
       if (!error.response) {
 				console.log({error})
-				// console.log(process.env.URL_FORTNITEAPI)
         return "Erro 18";
       }
       if (

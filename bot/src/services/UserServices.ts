@@ -17,13 +17,13 @@ export class UserServices implements IUserServices {
 		const userRepository = new UserRepository();
 		let userId = myCache.get(`${username}-${platform}`) as string | null;
 		if (!userId) {
-			console.log('UserId não Cacheado');
+			console.log('UserId not cached');
 			userId = await userRepository.getUserIdByUsername(username, platform);
 			if (userId) {
 				console.log('UserId', userId);
 				myCache.set(`${username}-${platform}`, userId, 10000);
 			} else {
-				console.log('UserId não encontrado');
+				console.log('UserId not found');
 				return null;
 			}
 		}

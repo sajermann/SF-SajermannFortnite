@@ -8,7 +8,6 @@ export class UserRepository implements IUserRepository {
 		username: string,
 		platform: string
 	): Promise<string | null> {
-		console.log(`/lookup?username=${encodeURI(username)}&platform=${platform}`);
 		const { data } = await api.get(
 			`/lookup?username=${encodeURI(username)}&platform=${platform}`,
 			{
