@@ -25,6 +25,6 @@ RUN npm run build
 RUN npm run copyRequiredsLinux
 
 # Remove todas as pastas exceto a pasta build
-RUN find /app -mindepth 1 -maxdepth 1 -type d -not -name "build" -exec rm -rf {} \;
+# RUN find /app -mindepth 1 -maxdepth 1 -type d -not -name "build" -exec rm -rf {} \;
 
 CMD ["node", "./build/src/index.js"]
