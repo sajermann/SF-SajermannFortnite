@@ -1,6 +1,6 @@
 {
   "name": "bot",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Bot do Discord responsável por fornecer as estatísticas através de comandos no Discord.",
   "author": "Bruno Sajermann",
   "main": "./src/index.js",
@@ -29,6 +29,5 @@
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.8.3"
   },
-  "lastUpdate": "2025-04-10T22:22:22Z"
+  "lastUpdate": "2025-04-10T23:15:56Z"
 }
-
