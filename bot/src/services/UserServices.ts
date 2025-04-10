@@ -13,7 +13,7 @@ export class UserServices implements IUserServices {
 		username: string,
 		platform: string,
 		templateHtml: string
-	): Promise<DiscordJs.MessageAttachment | null> {
+	): Promise<DiscordJs.AttachmentBuilder | null> {
 		const userRepository = new UserRepository();
 		let userId = myCache.get(`${username}-${platform}`) as string | null;
 		if (!userId) {
@@ -75,9 +75,9 @@ export class UserServices implements IUserServices {
 
 		})) as Buffer[];
 
-		const sfattach = new DiscordJs.MessageAttachment(
+		const sfattach = new DiscordJs.AttachmentBuilder(
 			bufferHtml as unknown as BufferResolvable,
-			'output.png'
+			{name: 'output.png'}
 		);
 
 		return sfattach;
