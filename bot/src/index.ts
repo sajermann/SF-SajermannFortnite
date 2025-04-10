@@ -1,10 +1,15 @@
 import fs from 'fs';
-import DiscordJs, { Intents, TextChannel } from 'discord.js';
+import DiscordJs, { ChannelType, GatewayIntentBits, TextChannel } from 'discord.js';
 import dotenv from 'dotenv';
 import path from 'path';
 import { UserServices } from './services/UserServices';
 import { DevServices } from './services/DevServices';
 import { formatDateAndHour } from './utils/formatDate';
+
+// TODO: O arquivo package tem que ser copiado para a pasta build e mudar o caminho de busca dele, se é
+// desenvolvimento é um caminho, prod é outro
+// TODO: Atualizar a aplicação
+// TODO: Criar bundler pois do jeito que está, está ficando grande a aplicação, afinal está indo a pasta node_modules pra dentro do container
 
 const CHANNEL_BOT_ID = process.env.CHANNEL_BOT_ID || '';
 
@@ -15,7 +20,7 @@ const HTML = fs
 dotenv.config();
 
 const client = new DiscordJs.Client({
-	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
+	intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages],
 });
 
 
@@ -25,8 +30,8 @@ client.once('ready', async () => {
 	const channel = client.channels.cache.get(CHANNEL_BOT_ID);
 	const devServices = new DevServices();
 	const result = await devServices.getVersion()
-	if (channel && channel.type === 'GUILD_TEXT' && result) {
-		const message = `Bot restarted \n Version: ${result.version} \n Last Update: ${formatDateAndHour(new Date(result.lastUpdate))}`
+	if (channel && channel.type === ChannelType.GuildText && result) {
+		const message = `Bot restarted \nVersion: ${result.version} \nLast Update: ${formatDateAndHour(new Date(result.lastUpdate))}`
 		console.log(message)
 		channel.send(message);
 	}
@@ -39,7 +44,7 @@ client.on('messageCreate', async message => {
 		const result = await devServices.getVersion()
 		if (result?.version && result?.lastUpdate) {
 			message.reply({
-				content: `Version: ${result.version} \n Last Update: ${formatDateAndHour(new Date(result.lastUpdate))}`,
+				content: `Version: ${result.version} \nLast Update: ${formatDateAndHour(new Date(result.lastUpdate))}`,
 			});
 		}
 		return
