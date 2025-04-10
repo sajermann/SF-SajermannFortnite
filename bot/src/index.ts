@@ -1,7 +1,7 @@
-import fs from 'fs';
+import fs from 'node:fs';
 import DiscordJs, { ChannelType, GatewayIntentBits, TextChannel } from 'discord.js';
 import dotenv from 'dotenv';
-import path from 'path';
+import path from 'node:path';
 import { UserServices } from './services/UserServices';
 import { DevServices } from './services/DevServices';
 import { formatDateAndHour } from './utils/formatDate';
@@ -71,7 +71,7 @@ client.on('messageCreate', async message => {
 	} catch (e) {
 		console.log(`Err func stats: ${e}`);
 		message.reply({
-			content: `Ocorreu um erro na pesquisa!`,
+			content: 'Ocorreu um erro na pesquisa!',
 		});
 	}
 });
