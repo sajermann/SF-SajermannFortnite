@@ -24,7 +24,11 @@ const HTML = fs
 dotenv.config();
 
 const client = new DiscordJs.Client({
-  intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages],
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+  ],
 });
 
 // Log na inicialização
