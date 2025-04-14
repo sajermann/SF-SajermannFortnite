@@ -2,13 +2,26 @@ const path = require('path');
 // const nodeExternals = require('webpack-node-externals');
 const CopyPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   mode: 'production',
   // mode: 'development', // Desativa minificação
-  devtool: 'source-map', // Gera source maps
+  //devtool: 'hidden-source-map', // Gera source maps sem incluir no bundle
   optimization: {
-    minimize: false, // Garante que não minificará
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          keep_classnames: true, // Preserva nomes de classes
+          keep_fnames: false, // Preserva nomes de funções
+          compress: {
+            defaults: true,
+            unused: true,
+          },
+          mangle: true,
+        },
+      }),
+    ],
   },
 
   target: 'node',
@@ -28,7 +41,6 @@ module.exports = {
       {
         test: /\.ts$/,
         use: 'ts-loader',
-        // exclude: /node_modules/,
       },
       {
         test: /\.node$/,
@@ -41,14 +53,11 @@ module.exports = {
   },
   resolve: {
     extensions: ['.ts', '.js'],
-    // alias: {
-    //   '@templates': path.resolve(__dirname, 'src/templates'),
-    // },
     alias: {
       'zlib-sync': path.resolve(
         __dirname,
         'node_modules/fflate/esm/browser.js',
-      ), // ou pako
+      ),
     },
     fullySpecified: false,
     fallback: {
