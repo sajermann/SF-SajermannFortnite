@@ -1,10 +1,6 @@
 import fs from 'node:fs';
-import path from 'node:path';
-import DiscordJs, {
-  ChannelType,
-  GatewayIntentBits,
-  TextChannel,
-} from 'discord.js';
+import { resolve } from 'node:path';
+import DiscordJs, { ChannelType, GatewayIntentBits } from 'discord.js';
 import dotenv from 'dotenv';
 import { DevServices } from './services/DevServices';
 import { UserServices } from './services/UserServices';
@@ -16,10 +12,13 @@ const IS_DEVELOPMENT = process.env.NODE_ENV === 'development';
 // TODO: Criar bundler pois do jeito que está, está ficando grande a aplicação, afinal está indo a pasta node_modules pra dentro do container
 
 const CHANNEL_BOT_ID = process.env.CHANNEL_BOT_ID || '';
+console.log(process.env);
 
-const HTML = fs
-  .readFileSync(path.resolve(__dirname, 'template', 'index.html'), 'utf8')
-  .toString();
+const RESOLVED = IS_DEVELOPMENT
+  ? resolve(__dirname, 'template', 'index.html')
+  : resolve(process.cwd(), 'template', 'index.html');
+
+const HTML = fs.readFileSync(RESOLVED, 'utf8').toString();
 
 dotenv.config();
 
