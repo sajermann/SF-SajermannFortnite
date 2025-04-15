@@ -1,30 +1,33 @@
-FROM node:20.12.2 as build
+# Estágio de construção
+FROM node:20.12.2 AS builder
 
 WORKDIR /app
 
-ENV PATH /app/node_modules/.bin:$PATH
 COPY package*.json ./
-COPY tsconfig.json ./
-RUN npm install
-COPY . ./
+RUN npm ci --include=dev
 
-# Comando para instalar as dependências do chromium para linux no container
-RUN apt-get update && apt-get install libnss3-dev libgdk-pixbuf2.0-dev libgtk-3-dev libxss-dev libasound2 -y
-
-ARG TOKEN_FORTNITEAPI
-ARG TOKEN
-ARG URL_FORTNITEAPI
-
-ENV TOKEN=${TOKEN}
-ENV URL_FORTNITEAPI=${URL_FORTNITEAPI}
-ENV TOKEN_FORTNITEAPI=${TOKEN_FORTNITEAPI}
-
-RUN echo "Token: ${TOKEN}"
-
+COPY . .
 RUN npm run build
-RUN npm run copyRequiredsLinux
 
-# Remove todas as pastas exceto a pasta build
-# RUN find /app -mindepth 1 -maxdepth 1 -type d -not -name "build" -exec rm -rf {} \;
+# Estágio de produção
+FROM node:20-alpine
 
-CMD ["node", "./build/src/index.js"]
+WORKDIR /app
+
+# Dependências do sistema para Chromium
+RUN apk add --no-cache \
+    chromium \
+    nss \
+    freetype \
+    harfbuzz \
+    ca-certificates \
+    ttf-freefont
+
+# Copia toda a estrutura do build (incluindo templates e package.json)
+COPY --from=builder /app/build/. .
+
+# Configurações de ambiente
+ENV NODE_ENV=production
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+
+CMD ["node", "index.js"]

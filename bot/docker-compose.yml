@@ -1,18 +1,9 @@
-version: "3.8"
 services:
   sajermann-fornite:
     image: "ghcr.io/sajermann/sf-sajermannfortnite/bot:latest"
     restart: always
     build:
       context: .
-      # args: 
-      #   - TOKEN={{secrets.TOKEN}}
-      #   - URL_FORTNITEAPI={{secrets.URL_FORTNITEAPI}}
-      #   - TOKEN_FORTNITEAPI={{secrets.TOKEN_FORTNITEAPI}}
-    # environment:
-    #   - URL_FORTNITEAPI={{ secrets.URL_FORTNITEAPI }}
-    #   - TOKEN_FORTNITEAPI={{ secrets.TOKEN_FORTNITEAPI }}
-    #   - TOKEN={{secrets.TOKEN}}
-
-
-
+      target: builder # Remove para usar estágio final
+    environment:
+      - NODE_ENV=production
