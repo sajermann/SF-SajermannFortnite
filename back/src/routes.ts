@@ -6,12 +6,14 @@ export const routes = express.Router();
 routes.get("/getStatsByUsername", async (req, res) => {
   const { username } = req.query;
   if (!username) {
-    return res.sendStatus(404).send();
+    res.status(404).send({ message: 'Username field required' })
+    return
   }
   const userServices = new UserServices();
   const result = await userServices.getStats(username as string);
   if(!result){
-    return res.sendStatus(404).send();
+    res.status(404).send({ message: 'User not found' });
+    return
   }
-  return res.status(200).json(result);
+  res.status(200).json(result);
 });
