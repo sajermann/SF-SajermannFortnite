@@ -1,33 +1,17 @@
 # Estágio de construção
 FROM node:20.12.2 AS builder
-
 WORKDIR /app
-
 COPY package*.json ./
 RUN npm ci --include=dev
-
 COPY . .
 RUN npm run build
 
-# Estágio de produção
-FROM node:20-alpine
-
+# --------------------------------------------------------
+# Estágio de produção (nomeado)
+FROM node:20-alpine AS production
 WORKDIR /app
-
-# Dependências do sistema para Chromium
-RUN apk add --no-cache \
-    chromium \
-    nss \
-    freetype \
-    harfbuzz \
-    ca-certificates \
-    ttf-freefont
-
-# Copia toda a estrutura do build (incluindo templates e package.json)
-COPY --from=builder /app/build/. .
-
-# Configurações de ambiente
+RUN apk add --no-cache chromium nss freetype harfbuzz ca-certificates ttf-freefont
+COPY --from=builder /app/build .
 ENV NODE_ENV=production
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
-
 CMD ["node", "index.js"]

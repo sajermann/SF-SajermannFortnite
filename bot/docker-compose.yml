@@ -1,9 +1,8 @@
 services:
   sajermann-fornite:
-    image: "ghcr.io/sajermann/sf-sajermannfortnite/bot:latest"
-    restart: always
     build:
       context: .
-      target: builder # Remove para usar estágio final
+      target: production # Remova se quiser usar o estágio final
+    restart: always
     environment:
       - NODE_ENV=production
