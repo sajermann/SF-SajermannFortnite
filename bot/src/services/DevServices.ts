@@ -1,5 +1,6 @@
 import { promises } from 'fs';
-import { join, resolve } from 'path';
+import { resolve } from 'path';
+import { formatDateAndHour } from '../utils/formatDate';
 import { IDevServices } from './IDevServices';
 const IS_DEVELOPMENT = process.env.NODE_ENV === 'development';
 
@@ -21,11 +22,16 @@ export class DevServices implements IDevServices {
 
   async getVersion() {
     const packageData = await this.getPackageData();
-    return packageData
-      ? {
-          version: packageData.version,
-          lastUpdate: packageData.lastUpdate,
-        }
-      : null;
+    if (!packageData) return null;
+    const config = {
+      version: packageData.version,
+      updatedAt: formatDateAndHour(new Date(packageData.lastUpdate)),
+      ambient: IS_DEVELOPMENT ? 'Development' : 'Production',
+    };
+
+    return {
+      ...config,
+      message: `Version: ${config.version} \nLast Update: ${config.updatedAt} \nAmbient: ${config.ambient}`,
+    };
   }
 }

@@ -32,9 +32,9 @@ client.once('ready', async () => {
   const devServices = new DevServices();
   const result = await devServices.getVersion();
   if (channel && channel.type === ChannelType.GuildText && result) {
-    const message = `Bot restarted \nVersion: ${result.version} \nLast Update: ${formatDateAndHour(new Date(result.lastUpdate))} \nAmbient: ${IS_DEVELOPMENT ? 'Development' : 'Production'}`;
+    console.log(`Bot restarted`, { ...result });
     if (!IS_DEVELOPMENT) {
-      channel.send(message);
+      channel.send(`Bot restarted \n${result.message}`);
     }
   }
 });
@@ -44,9 +44,9 @@ client.on('messageCreate', async message => {
   if (message.content === 'sf-version') {
     const devServices = new DevServices();
     const result = await devServices.getVersion();
-    if (result?.version && result?.lastUpdate) {
+    if (result) {
       message.reply({
-        content: `Version: ${result.version} \nLast Update: ${formatDateAndHour(new Date(result.lastUpdate))}`,
+        content: result.message,
       });
     }
     return;
