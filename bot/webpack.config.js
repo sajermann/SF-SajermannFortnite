@@ -1,28 +1,27 @@
 const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-// const TerserPlugin = require('terser-webpack-plugin');
-// const { minify } = require('terser-webpack-plugin/types/minify');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   mode: 'production',
   // mode: 'development', // Desativa minificação
   devtool: 'hidden-source-map', // Gera source maps sem incluir no bundle
   optimization: {
-    minimize: false,
-    // minimizer: [
-    //   new TerserPlugin({
-    //     terserOptions: {
-    //       keep_classnames: true, // Preserva nomes de classes
-    //       keep_fnames: true, // Preserva nomes de funções
-    //       compress: {
-    //         defaults: false,
-    //         unused: false,
-    //       },
-    //       mangle: false,
-    //     },
-    //   }),
-    // ],
+    // minimize: false,
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          keep_classnames: true, // Preserva nomes de classes
+          keep_fnames: true, // Preserva nomes de funções
+          compress: {
+            defaults: false,
+            unused: false,
+          },
+          mangle: false,
+        },
+      }),
+    ],
   },
 
   target: 'node',

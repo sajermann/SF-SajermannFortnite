@@ -12,11 +12,6 @@ export class DevServices implements IDevServices {
       const filePath = IS_DEVELOPMENT
         ? resolve(__dirname, '../../package.json')
         : resolve(process.cwd(), 'package.json');
-      // const filePath = resolve(process.cwd(), 'package.json');
-      console.log({ filePath });
-      // return IS_DEVELOPMENT
-      //   ? require(filePath)
-      //   : JSON.parse(await promises.readFile(filePath, 'utf-8'));
       return JSON.parse(await promises.readFile(filePath, 'utf-8'));
     } catch (error) {
       console.error('Error to read package.json:', error);

@@ -2,7 +2,7 @@ services:
   sajermann-fornite:
     build:
       context: .
-      target: production # Remova se quiser usar o estágio final
+      target: production
     restart: always
     environment:
       - NODE_ENV=production
