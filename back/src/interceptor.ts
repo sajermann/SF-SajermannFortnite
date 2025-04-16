@@ -3,10 +3,16 @@ import {
   AxiosError,
   AxiosRequestConfig,
   AxiosInstance,
+  InternalAxiosRequestConfig,
+  AxiosRequestHeaders,
 } from "axios";
 
+interface CustomAxiosRequestHeaders extends AxiosRequestHeaders {
+	refresh_token: string;
+	Authorization: string;
+}
+
 export default function Interceptor(api: AxiosInstance) {
-  console.log('Aqui Bruno', api.interceptors.response)
   api.interceptors.response.use(
     (response: AxiosResponse) => response,
     async (error: AxiosError) => {
@@ -45,10 +51,20 @@ export default function Interceptor(api: AxiosInstance) {
     }
   );
 
-  api.interceptors.request.use((config: AxiosRequestConfig) => {
+  const onRequestError = (error: AxiosError): Promise<AxiosError> => {
+		console.error(`[request error] [${JSON.stringify(error)}]`);
+		return Promise.reject(error);
+	};
+
+  const onRequest = (
+		config: InternalAxiosRequestConfig<CustomAxiosRequestHeaders>,
+	) => {
     if (config.headers) {
       config.headers.Authorization = process.env.TOKEN_FORTNITEAPI || "";
-      return Promise.resolve(config);
+      
     }
-  });
+    return Promise.resolve(config);
+  }
+
+  api.interceptors.request.use(onRequest, onRequestError);
 }

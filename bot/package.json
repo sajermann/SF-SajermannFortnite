@@ -7,7 +7,7 @@
   "scripts": {
     "test": "jest --coverage",
     "start": "cross-env NODE_ENV=development tsnd --exit-child src/index.ts",
-    "build": "npx tsc",
+    "build": "webpack --progress --stats detailed",
     "copyRequiredsWindows": "@powershell mkdir './build/src/template/' && @powershell copy './src/template/index.html' './build/src/template/index.html'",
     "copyRequiredsLinux": "mkdir './build/src/template/' && cp './src/template/index.html' './build/src/template/index.html'"
   },
@@ -15,19 +15,32 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^1.8.4",
+    "browserify-zlib": "^0.2.0",
+    "buffer": "^6.0.3",
     "discord.js": "^14.18.0",
-    "dotenv": "^16.4.7",
+    "dotenv": "^16.5.0",
+    "fflate": "^0.8.2",
     "node-cache": "^5.1.2",
-    "node-html-to-image": "^5.0.0"
+    "node-html-to-image": "^5.0.0",
+    "stream-browserify": "^3.0.0",
+    "util": "^0.12.5"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "@swc/jest": "^0.2.37",
     "@types/jest": "^29.5.14",
+    "@types/node": "^22.14.0",
+    "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^13.0.0",
     "cross-env": "^7.0.3",
     "jest": "^29.7.0",
+    "node-loader": "^2.1.0",
+    "terser-webpack-plugin": "^5.3.14",
+    "ts-loader": "^9.5.2",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "webpack": "^5.99.5",
+    "webpack-cli": "^6.0.1"
   },
-  "lastUpdate": "2025-04-10T23:27:50Z"
+  "lastUpdate": "2025-04-10T23:15:56Z"
 }
