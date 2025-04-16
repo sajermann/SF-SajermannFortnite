@@ -524,12 +524,6 @@ export default function Tabs({ infos }: Props) {
 					</div>
 				)}
 			</div>
-
-			<div className="grid grid-cols-12 md:grid-cols-6">
-				{[1, 2, 3, 4, 5, 6, 7, 8, 9, 5, 5, 5, 5, 5, 5].map(item => (
-					<div className="">Bruno</div>
-				))}
-			</div>
 		</>
 	);
 }

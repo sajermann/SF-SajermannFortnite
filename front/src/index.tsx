@@ -1,10 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import Header from './componentsx/Header';
+import Home from './pagesx/Home';
 import './index.css';
-import App from './App';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-	<React.StrictMode>
-		<App />
-	</React.StrictMode>
+  <React.StrictMode>
+    <Header />
+    <Home />
+  </React.StrictMode>,
 );

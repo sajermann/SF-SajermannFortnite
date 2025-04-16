@@ -1,4 +1,4 @@
-import api from '../../Pages/services/api';
+import api from '../../config/api/api';
 import UserType from '../../Types/UserType';
 
 export default async function getStatsUser(

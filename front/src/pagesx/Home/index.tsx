@@ -3,10 +3,10 @@ import Button from '../../Components/Button';
 import Tabs from '../../Components/Tabs';
 import getStatsUser from '../../Services/Stats';
 import UserType from '../../Types/UserType';
-import styles from './styles.module.css';
+
 
 export default function Home() {
-	const [userName, setUsername] = useState('Alemão-2021');
+	const [userName, setUsername] = useState('AlemaoRetroGame');
 	const [isLoading, setIsLoading] = useState(false);
 	const [userSelected, setUserSelected] = useState<UserType | null>(null);
 
@@ -20,7 +20,6 @@ export default function Home() {
 	}
 
 	function handleSubmit(event: FormEvent) {
-		console.log('Submit');
 		event.preventDefault();
 		load();
 	}
@@ -29,7 +28,7 @@ export default function Home() {
 		<>
 			<form className="w-full max-w-sm flex m-2 gap-1" onSubmit={handleSubmit}>
 				<input
-					className={styles.input}
+					className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
 					type="text"
 					data-testid="inputNewItem"
 					placeholder="Username"
