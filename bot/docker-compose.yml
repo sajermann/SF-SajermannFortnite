@@ -1,5 +1,5 @@
 services:
-  sajermann-fornite:
+  sajermann-fornite-bot:
     build:
       context: .
       target: production

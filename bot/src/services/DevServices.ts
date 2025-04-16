@@ -1,11 +1,10 @@
 import { promises } from 'fs';
 import { resolve } from 'path';
 import { formatDateAndHour } from '../utils/formatDate';
-import { IDevServices } from './IDevServices';
 const IS_DEVELOPMENT = process.env.NODE_ENV === 'development';
 
-export class DevServices implements IDevServices {
-  private async getPackageData(): Promise<{
+export class DevServices {
+  private static async getPackageData(): Promise<{
     version: string;
     lastUpdate: string;
   } | null> {
@@ -20,7 +19,7 @@ export class DevServices implements IDevServices {
     }
   }
 
-  async getVersion() {
+  static async getVersion() {
     const packageData = await this.getPackageData();
     if (!packageData) return null;
     const config = {

@@ -1,5 +1,5 @@
 # Estágio de construção
-FROM node:20.12.2 AS builder
+FROM node:20-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci --include=dev

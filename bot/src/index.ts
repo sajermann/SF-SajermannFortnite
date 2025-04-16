@@ -4,7 +4,6 @@ import DiscordJs, { ChannelType, GatewayIntentBits } from 'discord.js';
 import dotenv from 'dotenv';
 import { DevServices } from './services/DevServices';
 import { UserServices } from './services/UserServices';
-import { formatDateAndHour } from './utils/formatDate';
 
 const IS_DEVELOPMENT = process.env.NODE_ENV === 'development';
 
@@ -18,6 +17,8 @@ const HTML = fs.readFileSync(RESOLVED, 'utf8').toString();
 
 dotenv.config();
 
+const userServices = new UserServices();
+
 const client = new DiscordJs.Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -29,8 +30,7 @@ const client = new DiscordJs.Client({
 // Log na inicialização
 client.once('ready', async () => {
   const channel = client.channels.cache.get(CHANNEL_BOT_ID);
-  const devServices = new DevServices();
-  const result = await devServices.getVersion();
+  const result = await DevServices.getVersion();
   if (channel && channel.type === ChannelType.GuildText && result) {
     console.log(`Bot restarted`, { ...result });
     if (!IS_DEVELOPMENT) {
@@ -42,8 +42,7 @@ client.once('ready', async () => {
 client.on('messageCreate', async message => {
   if (!message.content.startsWith('sf-')) return;
   if (message.content === 'sf-version') {
-    const devServices = new DevServices();
-    const result = await devServices.getVersion();
+    const result = await DevServices.getVersion();
     if (result) {
       message.reply({
         content: result.message,
@@ -54,7 +53,6 @@ client.on('messageCreate', async message => {
   try {
     const userForSearch = message.content.split('sf-')[1].split('#')[0];
     const platform = message.content.split('#')[1] || 'epic';
-    const userServices = new UserServices();
     const result = await userServices.getStats(
       userForSearch as string,
       platform,
