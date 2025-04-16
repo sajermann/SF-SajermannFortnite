@@ -2,11 +2,11 @@ import NodeCache from 'node-cache';
 import { UserRepository } from '../repositories/UserRepository';
 import { IUserServices } from './IUserServices';
 const myCache = new NodeCache();
+const userRepository = new UserRepository();
 
 export class UserServices implements IUserServices {
   constructor() {}
   async getStats(username: string): Promise<object | null> {
-    const userRepository = new UserRepository();
     let userId = myCache.get(username) as string | null;
     if (!userId) {
       console.log('UserId not cached');

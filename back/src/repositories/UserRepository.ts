@@ -1,5 +1,5 @@
-import { IUserRepository } from "./IUserRepository";
-import api from "../api";
+import api from '../api';
+import { IUserRepository } from './IUserRepository';
 
 export class UserRepository implements IUserRepository {
   constructor() {}
