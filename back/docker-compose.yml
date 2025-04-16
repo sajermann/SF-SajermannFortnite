@@ -1,5 +1,5 @@
 services:
-  sajermann-fornite-back:
+  sajermann-fortnite-back:
     build:
       context: .
       target: production

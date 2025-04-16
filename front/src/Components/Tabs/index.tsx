@@ -1,7 +1,18 @@
 import { useState } from 'react';
 import { User, Users, UsersThree, UsersFour } from 'phosphor-react';
 import UserType from '../../Types/UserType';
-import styles from './styles.module.css';
+
+const styles = {
+	normalButton: 'inline-flex p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300',
+	activeButton: 'inline-flex p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 dark:text-blue-500 dark:border-blue-500',
+	normalIcon: 'mr-2 w-5 h-5 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300',
+	activeIcon: 'mr-2 w-5 h-5 text-blue-600 dark:text-blue-500',
+	content: 'flex bg-gray-800 flex-col p-4 h-[53vh]',
+	row: 'flex items-center w-full h-8 border-b-2',
+	label: 'w-3/12',
+	detail: 'w-1/2'
+}
+
 
 type Props = {
 	infos: UserType | null;
