@@ -1,6 +1,6 @@
 {
   "name": "sajermann-fortnite-bot",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "Bot do Discord responsável por fornecer as estatísticas através de comandos no Discord.",
   "author": "Bruno Sajermann",
   "main": "./src/index.js",
@@ -42,5 +42,5 @@
     "webpack": "^5.99.5",
     "webpack-cli": "^6.0.1"
   },
-  "lastUpdate": "2025-04-16T10:14:25Z"
+  "lastUpdate": "2025-04-17T23:11:04Z"
 }
