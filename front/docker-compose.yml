@@ -1,0 +1,7 @@
+version: "3"
+services:
+  sajermann-fortnite-front:
+    restart: always
+    build: .
+    ports:
+      - "80:80"
